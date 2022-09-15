@@ -1,0 +1,12 @@
+{
+    "data": [{
+        "userName": "john",
+        "password": "freespace123",
+        "role": "admin"
+    },
+    {
+        "userName": "john",
+        "password": "freespace123",
+        "role": "user"
+    }]
+}
