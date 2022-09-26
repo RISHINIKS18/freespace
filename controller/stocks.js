@@ -1,3 +1,4 @@
+const stockServices = require("../services/stocks");
 const stocksServices = require("../services/stocks");
 
 
@@ -46,7 +47,7 @@ class stocksController {
             const generateStockValue = await new stocksServices().generateStockValue();
             const data = {
                 userId,
-                value:generateStockValue
+                value: generateStockValue
             }
             const result = await new stocksServices().updateTranscationData(data);
             res.json(result);
@@ -63,7 +64,7 @@ class stocksController {
             const generateStockValue = await new stocksServices().generateStockValue();
             const data = {
                 stock_name,
-                value:generateStockValue
+                value: generateStockValue
             }
             const result = await new stocksServices().addStock(data);
             res.json(result);
@@ -72,6 +73,25 @@ class stocksController {
             console.log('######', error);
             return res.json(error);
 
+        }
+    }
+
+    static async fetchUserDeatils(req, res) {
+        try {
+            const address = req.params.address;
+            const callRestApi = await new stockServices().fetchUserDeatils(address);
+            if (callRestApi.status == 200 && callRestApi.statusText == 'OK') {
+                return res.json(callRestApi.data)
+            } else {
+                const failed = {
+                    status: '500',
+                    message: 'Request Failed !!!'
+                }
+                return res.json(failed)
+            }
+        } catch (error) {
+            console.log('Error Controller || fetchUserDeatils', error);
+            return res.json(error)
         }
     }
 }

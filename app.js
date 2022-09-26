@@ -36,18 +36,25 @@ app.get('/getAllStockPrice',
 )
 
 //Cron schedular for every 30 sec to get Stock Price
-cron.schedule("*/30 * * * * *", () => {
-    console.log("running a task every 30 Seconds");
-    request('http://localhost:6060/getStockPrice/6321e562bdb07bffb28cc373', function (error, response) {
-        console.log('##response#', response.body);
-        if (!error && response.statusCode == 200) {
-            console.log(body)
-        }
-    })
-})
+// cron.schedule("*/30 * * * * *", () => {
+//     console.log("running a task every 30 Seconds");
+//     request('http://localhost:6060/getStockPrice/6321e562bdb07bffb28cc373', function (error, response) {
+//         console.log('##response#', response.body);
+//         if (!error && response.statusCode == 200) {
+//             console.log(body)
+//         }
+//     })
+// })
 
 
-app.listen(port, () => console.log(`App Listing on  ${port}`));
+app.get('/fetchUserDeatils/:address',
+    StocksTransactions.fetchUserDeatils
+    //0xce94e5621a5f7068253c42558c147480f38b5e0d
+);
+
+
+
+    app.listen(port, () => console.log(`App Listing on  ${port}`));
 module.exports = app;
 mongoConfig.bootstrap();
 

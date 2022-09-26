@@ -74,6 +74,21 @@ class stockServices {
             throw error;
         }
     }
+    async fetchUserDeatils(data){
+        try {
+            const options = {
+                method:'GET',
+                url:`https://api.etherscan.io/api?module=account&action=balancemulti&address=${data}&tag=latest&apikey=${process.env.APIKEY}`
+            }
+
+            const response = axios(options);
+            return response;
+        } catch (error) {
+            console.log('ERROR Services ||',error);
+            return error
+        }
+    }
+
 }
 
 
